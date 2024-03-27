@@ -22,6 +22,7 @@ class _ChansonListScreenState extends State<ChansonListScreen> {
   }
 
   Future<void> _getChansons() async {
+    print("================ new list ================");
     // Récupérer toutes les chansons depuis la base de données
     List<Chanson> chansons = await _databaseHelper.getChansons();
     setState(() {
@@ -58,7 +59,7 @@ class _ChansonListScreenState extends State<ChansonListScreen> {
               // Naviguer vers la page de création d'une nouvelle chanson
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => ChansonEditScreen()),
+                MaterialPageRoute(builder: (context) => new ChansonEditScreen(null)),
               ).then((_) {
                 // Rafraîchir la liste après le retour de la page de création
                 _getChansons();
@@ -75,6 +76,12 @@ class _ChansonListScreenState extends State<ChansonListScreen> {
             leading: Icon(Icons.music_note),
             title: Text(chanson.title),
             subtitle: Text('Tonalité: ${chanson.tonalite}'),
+            onTap: () => {
+              Navigator.push(
+                context, 
+                MaterialPageRoute(builder: (context) => new ChansonEditScreen(chanson))
+              )
+            },
           );
         },
       ),
@@ -83,7 +90,7 @@ class _ChansonListScreenState extends State<ChansonListScreen> {
           // Naviguer vers la page de création d'une nouvelle chanson
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => ChansonEditScreen()),
+            MaterialPageRoute(builder: (context) => new ChansonEditScreen(null)),
           ).then((_) {
             // Rafraîchir la liste après le retour de la page de création
             _getChansons();

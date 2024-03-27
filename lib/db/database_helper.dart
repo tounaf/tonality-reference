@@ -44,6 +44,16 @@ class DatabaseHelper {
     await db.insert('chansons', chanson.toMap());
   }
 
+  Future<void> updateChanson(Chanson chanson) async {
+    final db = await database;
+    await db.update('chansons', chanson.toMap(), where: 'id = ?', whereArgs: [chanson.id]);
+  }
+
+  Future<void> deleteChanson(Chanson chanson) async {
+    final db = await database;
+    await db.delete('chansons', where: 'id = ?', whereArgs: [chanson.id]);
+  }
+
   Future<List<Chanson>> getChansons() async {
     final db = await database;
     final List<Map<String, dynamic>> maps = await db.query('chansons');
