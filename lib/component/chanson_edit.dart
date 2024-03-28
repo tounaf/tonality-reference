@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:song/component/chanson_list.dart';
 import 'package:song/model/chanson.dart';
 import 'package:song/db/database_helper.dart';
+import 'package:song/repository/chanson_repository.dart';
 
 class ChansonEditScreen extends StatefulWidget {
   
@@ -21,7 +22,7 @@ class _ChansonEditScreenState extends State<ChansonEditScreen> {
   final TextEditingController categoriesController = TextEditingController();
   String _textEditButton = "Ajouter";
   String _titleEdit = "Nouvelle Chanson";
-  final DatabaseHelper _databaseHelper = DatabaseHelper();
+  final ChansonRepository _databaseHelper = ChansonRepository();
 
   @override
   void initState() {
@@ -29,7 +30,6 @@ class _ChansonEditScreenState extends State<ChansonEditScreen> {
     if (widget.chanson != null) {
       _textEditButton = "Mettre à jour";
       _titleEdit = "Mise à jour";
-      print(widget.chanson!.categories);
       tonaliteController.text = widget.chanson!.tonalite;
       titleController.text = widget.chanson!.title;
       descriptionController.text = widget.chanson!.description;

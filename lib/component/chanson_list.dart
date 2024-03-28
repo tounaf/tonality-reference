@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:song/component/chanson_edit.dart';
 import 'package:song/model/chanson.dart';
 import 'package:song/db/database_helper.dart';
+import 'package:song/repository/chanson_repository.dart';
 
 class ChansonListScreen extends StatefulWidget {
   @override
@@ -10,7 +11,7 @@ class ChansonListScreen extends StatefulWidget {
 }
 
 class _ChansonListScreenState extends State<ChansonListScreen> {
-  final DatabaseHelper _databaseHelper = DatabaseHelper();
+  final ChansonRepository _databaseHelper = ChansonRepository();
   TextEditingController _searchController = TextEditingController();
 
   List<Chanson> _chansons = []; // Liste des chansons filtrées
@@ -22,7 +23,6 @@ class _ChansonListScreenState extends State<ChansonListScreen> {
   }
 
   Future<void> _getChansons() async {
-    print("================ new list ================");
     // Récupérer toutes les chansons depuis la base de données
     List<Chanson> chansons = await _databaseHelper.getChansons();
     setState(() {
